@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Journey</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #fff5f8;
+            color: #4b4b4b;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 100px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .message {
+            background: #fffcff;
+            border: 2px solid #ffafcc;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #ff77a9;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #ff77a9;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        button:hover {
+            transform: scale(1.1);
+            background-color: #ff4d79;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ff4d79;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="message-container" class="message">
+            <h1>Hai</h1>
+            <p>
+                Makasih udah hadir di bagian hidup aku beberapa bulan terakhir,  
+                I so happy when am with you, aku ngerasa disayang sama kamu,  
+                aku ngerasa pengen jadi anak-anak ketika sama kamu.
+            </p>
+        </div>
+        <div id="buttons">
+            <button id="next-btn" onclick="nextPart()">Next</button>
+        </div>
+        <div id="result"></div>
+    </div>
+    <script>
+        const partTitles = [
+            "Kenangan Indah",
+            "Maaf Aku Gak Peka",
+            "terus",
+            "Keinginanku",
+            "Permintaanku"
+        ];
+
+        const parts = [
+        "Makasih udah hadir di bagian waktu aku beberapa bulan terakhir, I so happy when am with you, aku ngerasa disayang sama kamu, aku ngerasa bisa jadi anak-anak ketika sama kamu.",
+        "Maafin aku yang gak peka ketika kamu ngambek atau ternyata kamu pengen aku Try to get closer to you, tapi aku malah diem aja, tapi serius aku suka kalo kamu ngambek karna aku abis ngomong cewe lain.",
+        "Aku gak nyesel kita udah sedeket ini, jadi aku gak berharap dari awal kita gak kenal, aku seneng banget kita deket, aku tuh pengen banget pamer ke semua orang kalo aku itu deket sama kamu.",
+        "Yang aku mau selama ini, deket sama kamu lebih dari temen-temen kamu yang lain, aku gak mau kamu punya pacar, aku pengen jadi orang yang paling deket sama kamu lah. I'm jealous when you talk about siapa itu si Dhika-Dhikka itu, or anyone else, a hikmal too",
+        "Maaf karna aku gak gentle dan malah mutusin hubungan kita, aku merasa kita gak usah bareng dulu di SMA, apalagi aku juga udah janji sama mama kamu, sama Abi aku, tapi aku berharap banget kamu mau nungguin aku sampai kita lulus. Egois ya."
+        ];
+
+        let currentPart = 0;
+        let attempts = 0;
+
+        function nextPart() {
+            const messageContainer = document.getElementById('message-container');
+            const buttons = document.getElementById('buttons');
+            currentPart++;
+
+            if (currentPart < parts.length) {
+                messageContainer.innerHTML = `
+                    <h1>${partTitles[currentPart]}</h1>
+                    <p>${parts[currentPart]}</p>
+                `;
+            } else {
+                messageContainer.innerHTML = `
+                    <h1>choose</h1>
+                    <p>spesial ya kamu, baru kali ini aku mutusin orang</p>
+                `;
+                buttons.innerHTML = `
+                    <button id="breakup-btn" onclick="breakUp()">Break up</button>
+                    <button onclick="pauseRelationship()">Break, aku balik lagi setelah Lulus</button>
+                `;
+            }
+        }
+
+        function moveButton() {
+            const breakupBtn = document.getElementById('breakup-btn');
+            const randomX = Math.random() * 90; // Range 0-90% untuk horizontal
+            const randomY = Math.random() * 90; // Range 0-90% untuk vertikal
+            breakupBtn.style.position = 'absolute';
+            breakupBtn.style.top = `${randomY}%`;
+            breakupBtn.style.left = `${randomX}%`;
+        }
+
+        function breakUp() {
+            attempts++;
+            if (attempts < 10) {
+                moveButton();
+            } else {
+                const messageContainer = document.getElementById('message-container');
+                const result = document.getElementById('result');
+                messageContainer.innerHTML = `
+                    <h2>Ouu, nice choise</h2>
+                    <p>
+                        Makasih banget untuk semuanya. Kamu udah ngerubah banyak hal yang kurang baik dari aku.  
+                        Kamu udah bikin aku ngerasain experience yang nggak pernah aku rasain sebelumnya.  
+                        Semoga di kehidupan selanjutnya aku bisa jadi cowok kayak miyamura, aku harap horimiya nya kamu ❤️
+                    </p>`;
+                result.innerHTML = `goodnight, IMU.`;
+                document.getElementById('buttons').style.display = 'none';
+            }
+        }
+
+        function pauseRelationship() {
+            const messageContainer = document.getElementById('message-container');
+            const result = document.getElementById('result');
+            messageContainer.innerHTML = `
+                <h2>I'll Be Waiting</h2>
+                <p>
+                    Kali ini aku egois. Tapi misalnya saat kamu nunggu aku, But if you feel your feelings change, that's fine, and if you found someone to take my place, that's cool too, aku nggak akan ngelarang  
+                    atau nahan kamu buat selalu nunggu aku.  
+                    Kalau ditanya aku ga sayang kamu? Ya sayang, aku kenapa-kenapa, but it's okay, my feelings, my affairs.  
+                    Jadi, it’s okay.
+                </p>`;
+            result.innerHTML = `Aku tau sih kamu bakal pilih ini😏 `;
+            document.getElementById('buttons').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
